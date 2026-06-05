@@ -1,0 +1,18 @@
+{
+  "name": "DEPL BOM DATA Portal",
+  "short_name": "DEPL BOM",
+  "description": "Production floor data entry portal for DEPL capacitors.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F3F4F6",
+  "theme_color": "#1E3A8A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/W3hvjn4q/CAPCO-HR-LOGO.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
