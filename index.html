@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DEPL BOM DATA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <section id="login-screen" class="screen active">
+        <div class="login-card">
+            <img src="https://i.postimg.cc/W3hvjn4q/CAPCO-HR-LOGO.jpg" alt="DEPL Logo" class="brand-logo">
+            <h2>BOM Data Portal</h2>
+            <p class="subtitle">Sign in to your production account</p>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <i class='bx bx-envelope'></i>
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class='bx bx-lock-alt'></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary" id="login-btn">
+                    <span>Login</span><i class='bx bx-right-arrow-alt'></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="app-screen" class="screen hidden">
+        <header class="top-nav">
+            <div class="nav-brand">
+                <img src="https://i.postimg.cc/W3hvjn4q/CAPCO-HR-LOGO.jpg" alt="DEPL Logo" class="nav-logo">
+                <span class="nav-title">DEPL Production</span>
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <span id="user-name" class="name">User</span>
+                    <span id="user-role" class="role">Role</span>
+                </div>
+                <button id="logout-btn" class="btn-icon" title="Logout"><i class='bx bx-log-out'></i></button>
+            </div>
+        </header>
+
+        <main class="workspace">
+            
+            <div id="module-selector" class="grid-menu">
+                <button class="module-card active" data-target="winding-form"><i class='bx bx-revision'></i><span>WINDING</span></button>
+                <button class="module-card" data-target="assembly-form"><i class='bx bx-cube-alt'></i><span>ASSEMBLY</span></button>
+                <button class="module-card admin-only" data-target="audit-view"><i class='bx bx-table'></i><span>DATA VIEW</span></button>
+            </div>
+
+            <div id="winding-form" class="data-form active-form">
+                <div class="form-header">
+                    <h3>Winding Data Entry</h3>
+                    <div class="batch-code-display">
+                        <span class="label">Generated Batch Code:</span>
+                        <span id="display-batch-code" class="code">PENDING ENTRY...</span>
+                    </div>
+                </div>
+
+                <form id="form-WINDING" class="modern-form grid-layout">
+                    <div class="form-group"><label>Product Code</label><select name="Product Code" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>MPP Size (µm x mm)</label><select name="MPP Size (µm x mm)" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>MPP film Type/Grade</label><input type="text" name="MPP film Type/Grade" required></div>
+                    <div class="form-group"><label>µF / kVAr Rating</label><input type="text" name="µF / kVAr Rating" placeholder="e.g. 20MFD" required></div>
+                    <div class="form-group"><label>Voltage</label><select name="Voltage" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>Winding µF</label><input type="number" step="0.01" name="Winding µF" required></div>
+                    <div class="form-group"><label>Element Dia. (mm)</label><input type="number" step="0.01" name="Element Dia. (mm)" required></div>
+                    <div class="form-group"><label>Winding Turns</label><input type="number" name="Winding Turns" required></div>
+                    <div class="form-group"><label>Batch No.</label><input type="text" name="Batch No." required></div>
+                    <div class="form-group"><label>PP core size (mm)</label><input type="number" step="0.01" name="PP core size (mm)" required></div>
+                    <div class="form-group"><label>Element Weight (g)</label><input type="number" step="0.01" name="Element Weight (g)" required></div>
+                    <div class="form-actions"><button type="submit" class="btn-success"><i class='bx bx-save'></i> Save Winding Data</button></div>
+                </form>
+            </div>
+
+            <div id="assembly-form" class="data-form hidden">
+                <div class="form-header"><h3>Assembly Data Entry</h3></div>
+                <form id="form-ASSEMBLY" class="modern-form grid-layout">
+                    <div class="form-group full-width"><label>Product_Batch Code</label><select name="Product_Batch Code" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>Box or Can dimensions (mm)</label><select name="Box or Can dimensions (mm)" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>Inner can (mm)</label><select name="Inner can (mm)" required><option value="">Loading...</option></select></div>
+                    <div class="form-group"><label>Color & size of wire/cable</label><input type="text" name="Color & size of wire/cable" required></div>
+                    <div class="form-actions"><button type="submit" class="btn-success"><i class='bx bx-save'></i> Save Assembly Data</button></div>
+                </form>
+            </div>
+
+            <div id="audit-view" class="data-form hidden">
+                <div class="form-header">
+                    <h3>Production Data Overview</h3>
+                    <select id="view-sheet-selector" class="view-filter">
+                        <option value="DATA">Master DATA Sheet</option>
+                        <option value="WINDING">Winding Sheet</option>
+                        <option value="ASSEMBLY">Assembly Sheet</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead><tr id="table-headers"></tr></thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
